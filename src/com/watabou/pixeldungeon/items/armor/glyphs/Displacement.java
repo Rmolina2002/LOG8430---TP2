@@ -33,31 +33,39 @@ public class Displacement extends Glyph {
 	private static final String TXT_DISPLACEMENT	= "%s of displacement";
 	
 	private static ItemSprite.Glowing BLUE = new ItemSprite.Glowing( 0x66AAFF );
-	
+
 	@Override
 	public int proc( Armor armor, Char attacker, Char defender, int damage ) {
-
 		if (Dungeon.bossLevel()) {
 			return damage;
 		}
-		
-		int level = armor.effectiveLevel();
-		int nTries = (level < 0 ? 1 : level + 1) * 5;
+		int nTries = calculateTries(armor);
+		performTries(nTries, defender);
+		return damage;
+	}
+	public void performTries(int nTries, Char defender){
 		for (int i=0; i < nTries; i++) {
 			int pos = Random.Int( Level.LENGTH );
-			if (Dungeon.visible[pos] && Level.passable[pos] && Actor.findChar( pos ) == null) {
-				
-				WandOfBlink.appear( defender, pos );
-				Dungeon.level.press( pos, defender );
-				Dungeon.observe();
-
+			if (isBlinkPossible(pos)) {
+				performBlink(defender, pos);
 				break;
 			}
 		}
-		
-		return damage;
 	}
-	
+	public boolean isBlinkPossible(int pos){
+		return Dungeon.visible[pos] && Level.passable[pos] && Actor.findChar( pos ) == null;
+	}
+	public void performBlink(Char defender, int pos){
+		WandOfBlink.appear( defender, pos );
+		Dungeon.level.press( pos, defender );
+		Dungeon.observe();
+	}
+	public int calculateTries(Armor armor){
+		int level = armor.effectiveLevel();
+		return (level < 0 ? 1 : level + 1) * 5;
+	}
+
+
 	@Override
 	public String name( String weaponName) {
 		return String.format( TXT_DISPLACEMENT, weaponName );
