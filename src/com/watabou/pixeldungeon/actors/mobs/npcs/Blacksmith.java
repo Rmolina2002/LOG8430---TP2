@@ -162,32 +162,7 @@ public class Blacksmith extends NPC {
 	}
 	
 	public static String verify( Item item1, Item item2 ) {
-		
-		if (item1 == item2) {
-			return "Select 2 different items, not the same item twice!";
-		}
-		
-		if (item1.getClass() != item2.getClass()) {
-			return "Select 2 items of the same type!";
-		}
-		
-		if (!item1.isIdentified() || !item2.isIdentified()) {
-			return "I need to know what I'm working with, identify them first!";
-		}
-		
-		if (item1.cursed || item2.cursed) {
-			return "I don't work with cursed items!";
-		}
-		
-		if (item1.level() < 0 || item2.level() < 0) {
-			return "It's a junk, the quality is too poor!";
-		}
-		
-		if (!item1.isUpgradable() || !item2.isUpgradable()) {
-			return "I can't reforge these items!";
-		}
-		
-		return null;
+		return item1.verifyItems(item2);
 	}
 	
 	public static void upgrade( Item item1, Item item2 ) {

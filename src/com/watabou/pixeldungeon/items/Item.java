@@ -89,6 +89,34 @@ public class Item implements Bundlable {
 	public boolean cursedKnown;
 	
 	public boolean unique = false;
+
+	public String verifyItems(Item other) {
+		if (this == other) {
+			return "Select 2 different items, not the same item twice!";
+		}
+
+		if (this.getClass() != other.getClass()) {
+			return "Select 2 items of the same type!";
+		}
+
+		if (!this.isIdentified() || !other.isIdentified()) {
+			return "I need to know what I'm working with, identify them first!";
+		}
+
+		if (this.cursed || other.cursed) {
+			return "I don't work with cursed items!";
+		}
+
+		if (this.level() < 0 || other.level() < 0) {
+			return "It's a junk, the quality is too poor!";
+		}
+
+		if (!this.isUpgradable() || !other.isUpgradable()) {
+			return "I can't reforge these items!";
+		}
+
+		return null;
+	}
 	
 	private static Comparator<Item> itemComparator = new Comparator<Item>() {	
 		@Override
