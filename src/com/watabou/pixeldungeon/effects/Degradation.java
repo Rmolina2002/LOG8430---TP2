@@ -121,28 +121,7 @@ public class Degradation extends Group {
 		private static final int COLOR = 0xFF4422;
 		private static final int SIZE = 3;
 		
-		public Speck( float x0, float y0, int mx, int my ) {
-			
-			super();
-			color( COLOR );
-			
-			float x1 = x0 + mx * SIZE;
-			float y1 = y0 + my * SIZE;
-			
-			PointF p = new PointF().polar( Random.Float( 2 * PointF.PI ), 8 );
-			x0 += p.x;
-			y0 += p.y;
-			
-			float dx = x1 - x0;
-			float dy = y1 - y0;
-			
-			x = x0;
-			y = y0;
-			speed.set( dx, dy );
-			acc.set( -dx / 4, -dy / 4 );
-			
-			left = lifespan = 2f;
-		}
+		private final Speck speck = SpeckUtils.createSpeck(x0, y0, mx, my);
 		
 		@Override
 		public void update() {
