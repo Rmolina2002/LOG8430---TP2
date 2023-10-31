@@ -76,4 +76,12 @@ public class Frost extends FlavourBuff {
 		Resistance r = ch.buff( Resistance.class );
 		return r != null ? r.durationFactor() * DURATION : DURATION;
 	}
+	@Override
+	public void applySpriteState(CharSprite sprite) {
+        sprite.add(CharSprite.State.FROST);
+	}
+	@Override
+    public void removeSpriteState(CharSprite sprite) {
+        sprite.remove( CharSprite.State.FROST );
+	}
 }

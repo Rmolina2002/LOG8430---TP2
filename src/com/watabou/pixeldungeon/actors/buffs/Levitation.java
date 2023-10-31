@@ -52,4 +52,12 @@ public class Levitation extends FlavourBuff {
 	public String toString() {
 		return "Levitating";
 	}
+	@Override
+	public void applySpriteState(CharSprite sprite) {
+        sprite.add(CharSprite.State.LEVITATING);
+	}
+	@Override
+	public void removeSpriteState(CharSprite sprite) {
+        sprite.remove(CharSprite.State.LEVITATING);
+	}
 }

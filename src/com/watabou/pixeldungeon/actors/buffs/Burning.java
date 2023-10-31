@@ -151,4 +151,13 @@ public class Burning extends Buff implements Hero.Doom {
 		Dungeon.fail( Utils.format( ResultDescriptions.BURNING, Dungeon.depth ) );
 		GLog.n( TXT_BURNED_TO_DEATH );
 	}
+	@Override
+    public void applySpriteState(CharSprite sprite) {
+        sprite.add(CharSprite.State.BURNING);
+	}
+	@Override
+    public void removeSpriteState(CharSprite sprite) {
+        sprite.remove( CharSprite.State.BURNING );
+	}
 }
+

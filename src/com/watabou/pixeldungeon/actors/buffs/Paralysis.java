@@ -63,4 +63,12 @@ public class Paralysis extends FlavourBuff {
 			ch.paralysed = false;
 		}
 	}
+	@Override
+	public void applySpriteState(CharSprite sprite) {
+        sprite.add(CharSprite.State.PARALYSIS);
+	}
+	@Override
+	public void removeSpriteState(CharSprite sprite) {
+        sprite.remove(CharSprite.State.PARALYSIS);
+	}
 }

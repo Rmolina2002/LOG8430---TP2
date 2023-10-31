@@ -97,4 +97,6 @@ public class Buff extends Actor {
 	public static void detach( Char target, Class<? extends Buff> cl ) {
 		detach( target.buff( cl ) );
 	}
+	public abstract void applySpriteState(CharSprite sprite);
+	public abstract void removeSpriteState(CharSprite sprite);
 }

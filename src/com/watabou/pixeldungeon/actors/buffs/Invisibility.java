@@ -57,4 +57,13 @@ public class Invisibility extends FlavourBuff {
 			buff.detach();
 		}
 	}
+	@Override
+	public void applySpriteState(CharSprite sprite) {
+        sprite.add(CharSprite.State.INVISIBLE);
+	}
+	@Override
+	public void removeSpriteState(CharSprite sprite) {
+        sprite.remove(CharSprite.State.INVISIBLE);
+	}
+	
 }

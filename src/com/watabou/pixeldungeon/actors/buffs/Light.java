@@ -55,4 +55,12 @@ public class Light extends FlavourBuff {
 	public String toString() {
 		return "Illuminated";
 	}
+	@Override
+	public void applySpriteState(CharSprite sprite) {
+        sprite.add(CharSprite.State.LIGHT);
+	}
+	@Override
+	public void removeSpriteState(CharSprite sprite) {
+        sprite.remove(CharSprite.State.LEVITATING);
+	}
 }
